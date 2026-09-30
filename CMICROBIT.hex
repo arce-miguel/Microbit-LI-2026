@@ -1,0 +1,26 @@
+from microbit import *
+import time
+
+# Configurar el puerto serie a la misma velocidad que el script de Bash
+uart.init(baudrate=115200)
+
+ultimo_movimiento = 0
+ultima_luz = 0
+cooldown = 3000 # Esperar 3000 milisegundos (3 segundos) entre alertas
+
+while True:
+    tiempo_actual = time.ticks_ms()
+    
+    #movimiento brusco
+    if accelerometer.was_gesture('shake'):
+        if tiempo_actual - ultimo_movimiento > cooldown:
+            print("ALERTA_MOVIMIENTO")
+            ultimo_movimiento = tiempo_actual
+            
+    # recibe luz 
+    if display.read_light_level() > 100:
+        if tiempo_actual - ultima_luz > cooldown:
+            print("ALERTA_LUZ")
+            ultima_luz = tiempo_actual
+            
+    sleep(100) # Pausa breve para estabilizar el procesador
