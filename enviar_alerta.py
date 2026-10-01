@@ -5,7 +5,7 @@ from email.message import EmailMessage
 
 ruta_foto = sys.argv[1] if len(sys.argv) > 1 else None
 
-remitente = "miguelarcebenitez@gmail.com"
+remitente = ""
 destinatario = "l23211916@tectijuana.edu.mx"
 password_app = ""
 
